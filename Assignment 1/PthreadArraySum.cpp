@@ -6,7 +6,7 @@
 #include <pthread.h>
 
 #define ARRAY_LENGTH 100000
-#define NUM_THREADS 60
+#define NUM_THREADS 1
 
 typedef std::chrono::high_resolution_clock Clock;
 using namespace std;
@@ -92,10 +92,10 @@ int main() {
 
 	t2 = tmr.elapsed();
 	cout << "Pthread sum time: " << t2 - t1 << endl << endl;
-	pthread_exit(NULL);
 
-	cout << endl << "-----------------Program has ended-----------------" << endl;
+	cout << "-----------------Program has ended-----------------" << endl;
 	cout << "Press Enter to continue." << endl;
 	cin.get();
+	pthread_exit(NULL);
 	return 0;
 }

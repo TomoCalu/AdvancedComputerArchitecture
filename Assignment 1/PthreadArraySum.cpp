@@ -1,4 +1,4 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <chrono>
 
@@ -6,13 +6,10 @@
 #include <pthread.h>
 
 #define ARRAY_LENGTH 100000
-#define NUM_THREADS 1
-
-typedef std::chrono::high_resolution_clock Clock;
-using namespace std;
+#define NUM_THREADS 4
 
 int numbersToAdd[ARRAY_LENGTH];
-int sumWithOnePthread[ARRAY_LENGTH/NUM_THREADS] = {0};
+int sumWithOnePthread[ARRAY_LENGTH / NUM_THREADS] = { 0 };
 int part = 0;
 
 class Timer
@@ -49,13 +46,13 @@ int main() {
 	int rc;
 	int totalPthreadSum = 0;
 
-	cout << "-------------Pthread array sum example-------------"<< endl << endl;
+	std::cout<< "-------------Pthread array sum example-------------" << std::endl << std::endl;
 
-	cout << "Generating array. " << endl;
+	std::cout << "Generating array. " << std::endl;
 	for (i = 0; i < ARRAY_LENGTH; i++) {
 		numbersToAdd[i] = rand() % 100;
 	}
-	cout << endl;
+	std::cout << std::endl;
 
 	srand(time(NULL));
 	t1 = tmr.elapsed();
@@ -64,19 +61,19 @@ int main() {
 	}
 	t2 = tmr.elapsed();
 
-	cout << "Sequential sum = " << arraySequentialSum << endl;
-	cout << "Sequential sum time: " << t2 - t1 << endl << endl;
+	std::cout << "Sequential sum = " << arraySequentialSum << std::endl;
+	std::cout << "Sequential sum time: " << t2 - t1 << std::endl << std::endl;
 
-	cout << "Starting pthreads. " << endl;
+	std::cout << "Starting pthreads. " << std::endl;
 
 	t1 = tmr.elapsed();
 	for (i = 0; i < NUM_THREADS; i++) {
-		cout << "main() : creating thread, " << i << endl;
+		std::cout << "main() : creating thread, " << i << std::endl;
 		rc = pthread_create(&threads[i], NULL, GetSumWithMultiplePthreads, (void *)NULL);
 
 		if (rc) {
-			cout << "Error:unable to create thread," << rc << endl;
-			exit(-1);
+			std::cout << "Error:unable to create thread," << rc << std::endl;
+			return EXIT_FAILURE;
 		}
 	}
 
@@ -87,15 +84,15 @@ int main() {
 	for (int i = 0; i < NUM_THREADS; i++) {
 		totalPthreadSum += sumWithOnePthread[i];
 	}
-	cout << endl;
-	cout << "Total sum with pthreads: " << totalPthreadSum << endl;
+	std::cout << std::endl;
+	std::cout << "Total sum with pthreads: " << totalPthreadSum << std::endl;
 
 	t2 = tmr.elapsed();
-	cout << "Pthread sum time: " << t2 - t1 << endl << endl;
+	std::cout << "Pthread sum time: " << t2 - t1 << std::endl << std::endl;
 
-	cout << "-----------------Program has ended-----------------" << endl;
-	cout << "Press Enter to continue." << endl;
-	cin.get();
+	std::cout << "-----------------Program has ended-----------------" << std::endl;
+	std::cout << "Press Enter to continue." << std::endl;
+	std::cin.get();
 	pthread_exit(NULL);
-	return 0;
+	return EXIT_SUCCESS;
 }

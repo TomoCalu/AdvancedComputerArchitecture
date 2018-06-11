@@ -5,7 +5,7 @@
 #include <iostream>
 
 
-#define IMAGE_LOCATION "Examples/forest.jpg"
+#define IMAGE_LOCATION "Examples/lena.jpg"
 #define FIRST_THRESHOLD 50
 #define SECOND_THRESHOLD 150
 #define KERNEL_SIZE 3

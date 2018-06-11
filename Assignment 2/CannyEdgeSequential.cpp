@@ -3,7 +3,7 @@
 #include <iostream>
 #include <chrono>
 
-#define IMAGE_LOCATION "Examples/forest.jpg"
+#define IMAGE_LOCATION "Examples/hill.jpg"
 #define FIRST_THRESHOLD 50
 #define SECOND_THRESHOLD 150
 #define KERNEL_SIZE 3
@@ -63,8 +63,7 @@ int main()
 	imshow("Output image", outputImage);
 
 	std::cout << "Sequential canny edge time: " << t2 - t1 << std::endl << std::endl;
-
-	printf("Program has ended. Press any key to continue... \n");
+	std::cout << "Program has ended. Press any key to continue..." << std::endl;
 	cv::waitKey(0);
 
 	return EXIT_SUCCESS;
